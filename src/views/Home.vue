@@ -10,7 +10,7 @@
   <v-flex md6 xs12>
 
   <p class="pl-0  font-weight-medium" style="font-size:50px;">Let your style, Speak For <br> You.</p>
-  <v-btn v-if="!token" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4">Get Started</v-btn>
+  <v-btn v-if="!token" @click="$router.push('/signup')" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4">Get Started</v-btn>
   </v-flex>
   <v-flex md6 style="position:relative" xs12>
     <div style="position:absolute; z-index:99;height:100%;
