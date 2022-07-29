@@ -10,7 +10,7 @@
   <v-flex md6 xs12>
 
   <p class="pl-0  font-weight-medium" style="font-size:50px;">Let your style, Speak For <br> You.</p>
-  <v-btn v-if="!token" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4  ml-12">Get Started</v-btn>
+  <v-btn v-if="!token" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4">Get Started</v-btn>
   </v-flex>
   <v-flex md6 style="position:relative" xs12>
     <div style="position:absolute; z-index:99;height:100%;
@@ -44,7 +44,7 @@
           <div class="pa-2">
 
 <p class="mb-2 text-capitalize text-truncate font-weight-medium">{{n.name}}</p>
-<p style="font-size:14px" class="grey--text text--darken-2 mb-3">{{n.description +'hngcjjj jyfiv jyfu jyfuyf jhgug kjgkg kgu mhgj jhjhvhvkj hvkv mvk' | description}}</p>
+<p style="font-size:14px" class="grey--text text--darken-2 mb-3">{{n.description | description}}</p>
 <v-btn color="#903813" dark class="font-weight-bold" small>enquire</v-btn>
           </div>
         </v-card>
