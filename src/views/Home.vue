@@ -1,29 +1,51 @@
 <template>
   <v-container style="max-width:990px" class="home">
   <headernav />
-<div style="overflow-x:scroll" class="py-3">
+
+<v-layout class="pt-5" wrap>
+  <v-flex class="my-8" xs12>
+<v-card outlined color="#f5f5f5" min-height="50vh">
+  <v-layout class="  d-flex justify-space-between align-center" wrap>
+
+  <v-flex md6 xs12>
+
+  <p class="pl-0  font-weight-medium" style="font-size:50px;">Let your style, Speak For <br> You.</p>
+  <v-btn v-if="!token" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4  ml-12">Get Started</v-btn>
+  </v-flex>
+  <v-flex md6 style="position:relative" xs12>
+    <div style="position:absolute; z-index:99;height:100%;
+    left: 0px;
+    width: 60%;
+    background: linear-gradient(to right, #f5f5f5 6%, rgba(0, 0, 0, 0) 100%);"></div>
+    <v-avatar tile height="50vh"  width="100%">
+
+  <v-img style="background-position:top center!important" src="https://res.cloudinary.com/payhospi/image/upload/v1659083424/ankara_eprfhi.jpg"></v-img>
+    </v-avatar>
+  </v-flex>
+  </v-layout>
+</v-card>
+  </v-flex>
+  <v-flex xs12 md8>
+    <div style="overflow-x:scroll" class="py-3 mb-6">
 <div style="" class="d-inline-flex pt-0">
-<v-chip :dark="category== ''" @click="getProducts()" style="width:auto" class="mr-3">All</v-chip>
-<v-chip :dark="category== n" @click="getProductsByCategory(n)" style="width:auto" class="mr-3" v-for="(n, i) in categories" :key="i">{{n}}</v-chip>
+<v-chip :dark="category== ''" :color="category== ''? '#903813':'#f5f5f5'" @click="getProducts()" style="width:auto" class="rounded-sm mr-3">All</v-chip>
+<v-chip :dark="category== n"  :color="category== n? '#903813':'#f5f5f5'" @click="getProductsByCategory(n)" style="width:auto" class="rounded-sm mr-3" v-for="(n, i) in categories" :key="i">{{n}}</v-chip>
 <div class="px-5"></div>
 </div>
 </div>
-<v-layout class="pt-5" wrap>
-  <v-flex xs12 md8>
     <v-layout wrap>
       <v-flex v-show="loading" class="pa-3" v-for="(n) in ['j', 'k', 'l']" :key="n" xs6 sm4>
-        <v-card flat color="grey lighten-3" width="100%" height="308px" >
-          
+        <v-card outlined color="grey lighten-3" width="100%" height="308px" >
         </v-card>
       </v-flex>
-      <v-flex v-show="!loading" class="pa-2" v-for="(n, i) in products" :key="i" xs6 sm4>
-        <v-card @click="openProduct(n)">
+      <v-flex v-show="!loading" class="pa-2 mb-4" v-for="(n, i) in products" :key="i" xs6 sm4>
+        <v-card outlined @click="openProduct(n)">
           <v-avatar tile height="200px" width="100%"><v-img contain :src="n.image || 'https://res.cloudinary.com/base-uni/image/upload/v1658076722/alpha_connect/C7E03945-30FB-49E5-90AF-FE6D67322900_kegufu.png'"></v-img></v-avatar>
           <div class="pa-2">
 
 <p class="mb-2 text-capitalize text-truncate font-weight-medium">{{n.name}}</p>
-<p class="mb-2">N{{n.price | price}}</p>
-<v-btn color="#10417d" dark class="font-weight-bold" small>buy now</v-btn>
+<p style="font-size:14px" class="grey--text text--darken-2 mb-3">{{n.description +'hngcjjj jyfiv jyfu jyfuyf jhgug kjgkg kgu mhgj jhjhvhvkj hvkv mvk' | description}}</p>
+<v-btn color="#903813" dark class="font-weight-bold" small>enquire</v-btn>
           </div>
         </v-card>
       </v-flex>
@@ -35,6 +57,14 @@
 </v-flex></v-layout>
   </v-container>
 </template>
+
+<style>
+
+.v-image__image.v-image__image--cover {
+    background-position: top center!important;
+}
+
+</style>
 
 <script>
 // @ is an alias to /src
@@ -52,7 +82,7 @@ export default {
       data: () => ({
     loading:false,
    category: '',
-    categories: ['Clothes', 'Phones', 'Laptops', 'Provisions', 'Stationaries'],
+    categories: ['Casual wears', 'Ankara', 'Gown', 'Shirts', 'Trousers', 'Accessories'],
     description: '',
     img2: "https://res.cloudinary.com/base-uni/image/upload/v1658076722/alpha_connect/C7E03945-30FB-49E5-90AF-FE6D67322900_kegufu.png",
   }),
@@ -87,7 +117,7 @@ this.getProducts()
       getProducts(){
         this.loading = true
         this.category = ''
-        axios.get('/product').then((res)=>{
+        axios.get('/product?shop=mystyle').then((res)=>{
           this.products = res.data.products
           this.loading = false
   })

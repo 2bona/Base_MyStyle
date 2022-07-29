@@ -55,7 +55,7 @@
           required
         ></v-text-field>
       <v-btn
-        class="font-weight-bold mr-4" color="#0b3054"
+        class="font-weight-bold mr-4" color="#903813"
         type="submit" large dark
         :loading="loading" @click="save()"
       >

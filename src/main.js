@@ -36,8 +36,8 @@ Vue.filter("myDate", function (created) {
   return moment(created).format("lll");
 });
 Vue.filter("description", function(text) {
-  if (text.length >= 100) {
-    return text.slice(0, 100) + '..';
+  if (text.length >= 40) {
+    return text.slice(0, 40) + '..';
   } else {
     return text;
   }

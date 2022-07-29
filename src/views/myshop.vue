@@ -6,7 +6,7 @@
 <v-flex xs12 md8 class=" ">
   <v-flex xs12>
 
-<p class=" grey--text " style="font-size:20px">Add New Product</p>
+<p class=" grey--text " style="font-size:20px">Add New Design</p>
 
 <v-form  onSubmit="return false;" class="mb-6" style="max-width:630px" >
          <v-select
@@ -26,6 +26,12 @@
           label="Price"
           required
         ></v-text-field>
+          <v-file-input
+    label="Product Image"
+     :loading="loading2"
+    @change="fileChange"
+    prepend-icon="mdi-camera"
+  ></v-file-input>
         <v-textarea
           v-model="description"
           label="Description"
@@ -37,9 +43,9 @@
 
    
       <v-btn
-        class="font-weight-bold mr-4" color="#0b3054"
+        class="font-weight-bold mr-4" color="#903813"
         type="submit" large dark
-        :loading="loading"
+        :loading="loading || loading2"
         @click="addProduct()"
       >
         submit
@@ -49,7 +55,7 @@
 
       <v-layout wrap>
 
-<p class=" grey--text " style="font-size:20px">My Products</p>
+<p class=" grey--text " style="font-size:20px">My Designs</p>
       <v-flex xs12>
         <v-layout wrap>
 
@@ -59,7 +65,7 @@
           <div class="pa-2">
 
 <p class="mb-2 font-weight-medium">{{n.name}}</p>
-<p class="mb-2">N{{n.price | price}}</p>
+<p class="mb-2">N{{n.description | description}}</p>
 <v-btn @click="deleteProduct(n.id)" :loading="loading" color="red" dark icon class="font-weight-bold" small><v-icon>mdi-trash-can</v-icon></v-btn>
           </div>
         </v-card>
@@ -72,8 +78,6 @@
 <v-flex :class="$vuetify.breakpoint.smAndUp? 'pl-4': ''" xs12 md4>
 <adcard /></v-flex>
       </v-layout>
-
-
     </v-container>
   </div>
 </template>
@@ -82,6 +86,7 @@
 import axios from "axios";
 const headernav = () => import("../components/headernav.vue");
 const adcard = () => import("../components/adcard.vue");
+import imageCompression from 'browser-image-compression';
 
 // @ is an alias to /src
 
@@ -96,8 +101,11 @@ export default {
     category: '',
     name: '',
     price: '',
+    productImage: '',
+    loading2:false,
+    attachments: [],
     description: '',
-    categories: ['Clothes', 'Phones', 'Laptops', 'Provisions', 'Stationaries','Clothes', 'Phones', 'Laptops', 'Provisions', 'Stationaries'],
+    categories: ['Casual wears', 'Ankara', 'Gown', 'Shirts', 'Trousers', 'Accessories'],
     img: "https://res.cloudinary.com/base-uni/image/upload/v1658076824/alpha_connect/GWC_ALt_logo_1_zkglzr.png"
   }),
      computed:{
@@ -120,6 +128,29 @@ export default {
        this.getMyProducts()
      },
   methods:{
+      fileChange(e) {
+        if(!e.name)return
+          
+          this.attachments = [];
+      
+            this.loading2 = true;
+console.log(e)
+ 
+        var options = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+    useWebWorker: true
+  }
+
+  imageCompression(e, options)
+    .then( (compressedFile)=> {
+      this.attachments.push(compressedFile);
+      this.loading2 = false;
+    })
+    .catch(function () {
+      this.loading2 = false;
+    });
+    },
     deleteProduct(x){
       this.loading = true
       axios.get('product/delete?id='+x).then(()=>{
@@ -130,14 +161,20 @@ export default {
     },
 
     addProduct(){
+      const sn = this
       this.loading = true
-      axios.post('product/create',{
-        name: this.name,
-        price: this.price,
-        description: this.description,
-        user_id: this.user.id,
-        category: this.category,
-      }).then((res)=>{
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const fd = new FormData();
+   
+        fd.append("files[" + 0 + "]", sn.attachments[0]);
+        fd.append("name", sn.name)
+        fd.append("price", sn.price)
+        fd.append("description", sn.description)
+        fd.append("user_id", sn.user.id)
+        fd.append("category", sn.category)
+        fd.append("shop", 'mystyle')
+    
+      axios.post('product/create',fd, config).then((res)=>{
         this.my_products = res.data.success
       this.loading = false
        })

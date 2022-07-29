@@ -13,8 +13,7 @@
             </v-avatar>
             <v-flex  class=" align-center px-3" xs12>
     <p style="font-size:30px" class="grey--text mb-2 text--darken-3 text-capitalize font-weight-bold">{{product.name}} </p>
-    <p style="font-size:20px" class="font-weight-bold grey--text text--darken-2">N{{product.price | price}}</p>
-              <v-btn :loading="loading" @click="buyItem()" class="font-weight-bold" color="#10417d" large dark>Buy this  item<v-icon size="15" class="ml-2">mdi-cart</v-icon></v-btn>
+              <v-btn :loading="loading" @click="buyItem()" class="font-weight-bold" color="#903813" large dark>Make enquiries</v-btn>
              <p class="mt-4 grey--text text--darken-1">{{product.description}}</p>
               </v-flex>
         </v-card>
@@ -83,7 +82,7 @@ computed:{
               id: this.product.id,
           }).then(()=>{
               this.loading = false
-              alert('Thank you, the seller will contact you for more details')
+              alert('Thank you, the designer will contact you for more details')
           })
           }else{
               this.$router.push('/signup')
