@@ -40,7 +40,7 @@
       </v-flex>
       <v-flex v-show="!loading" class="pa-2 mb-4" v-for="(n, i) in products" :key="i" xs6 sm4>
         <v-card outlined @click="openProduct(n)">
-          <v-avatar tile height="200px" width="100%"><v-img contain :src="n.image || 'https://res.cloudinary.com/base-uni/image/upload/v1658076722/alpha_connect/C7E03945-30FB-49E5-90AF-FE6D67322900_kegufu.png'"></v-img></v-avatar>
+          <v-avatar tile height="200px" width="100%"><v-img  :src="n.image || 'https://res.cloudinary.com/base-uni/image/upload/v1658076722/alpha_connect/C7E03945-30FB-49E5-90AF-FE6D67322900_kegufu.png'"></v-img></v-avatar>
           <div class="pa-2">
 
 <p class="mb-2 text-capitalize text-truncate font-weight-medium">{{n.name}}</p>
