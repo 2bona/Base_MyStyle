@@ -2,12 +2,12 @@
   <v-container style="max-width:990px" class="home">
   <headernav />
 
-<v-layout class="pt-5" wrap>
+<v-layout  class="pt-5" wrap>
   <v-flex class="my-8" xs12>
 <v-card outlined color="#f5f5f5" min-height="50vh">
   <v-layout class="  d-flex justify-space-between align-center" wrap>
 
-  <v-flex md6 xs12>
+  <v-flex :class="$vuetify.breakpoint.smAndUp? '': 'text-center'" md6 xs12>
 
   <p class="pl-0  font-weight-medium" style="font-size:50px;">Your Fashion Is<br> Our Passion.</p>
   <v-btn v-if="!token" @click="$router.push('/signup')" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4">Get Started</v-btn>
