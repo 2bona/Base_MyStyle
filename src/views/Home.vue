@@ -7,9 +7,11 @@
 <v-card outlined color="#f5f5f5" min-height="50vh">
   <v-layout class="  d-flex justify-space-between align-center" wrap>
 
-  <v-flex :class="$vuetify.breakpoint.smAndUp? '': 'text-center'" md6 xs12>
+  <v-flex :class="$vuetify.breakpoint.smAndUp? '': 'text-center mb-12'" md6 xs12>
 
   <p class="pl-0  font-weight-medium" style="font-size:50px;">Your Fashion Is<br> Our Passion.</p>
+  <p :class="$vuetify.breakpoint.smAndUp? '': 'mx-auto'" class="pl-0 grey--text text--darken-1" style="font-size:13px;max-width:300px">MyStyle is a platform that aims to unleash the creativity in fashion enthusiasts by connecting you to quality designers.</p>
+  
   <v-btn v-if="!token" @click="$router.push('/signup')" x-large style="color:" depressed color="#903813" dark  class="font-weight-black px-12 text-capitalize my-4">Get Started</v-btn>
   </v-flex>
   <v-flex md6 style="position:relative" xs12>
