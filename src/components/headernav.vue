@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex align-center justify-space-between">
-    <p @click="$router.push('/')" class="font-weight-black mb-0" style="color:#903813;font-size: 25px">My Style</p>
+    <p @click="$router.push('/')" class="font-weight-black mb-0 grey--text" style="font-size: 25px"><span class="black--text">My</span>Style</p>
     <v-btn outlined color="grey darken-2" v-if="token" to="/myshop" depressed> my designs </v-btn>
     <v-avatar @click="$router.push('/profile')" size="60" class="">
       <v-img :src="img2"></v-img>
